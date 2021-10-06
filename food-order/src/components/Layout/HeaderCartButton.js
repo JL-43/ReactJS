@@ -8,7 +8,7 @@ const HeaderCartButton = (props) => {
 	let badgeValue = '3';
 
 	return (
-		<button className={classes.button}>
+		<button className={classes.button} onClick={props.onClick}>
 			<span className={classes.icon}>
 				<CartIcon />
 			</span>
