@@ -16,9 +16,9 @@ function App() {
 	// 	setCartIsShown(false);
 	// };
 
-	// Turo ni bhosxzc Aethan "Petmalu" Ilagan
+	// Turo ni bhosxzc Aethan "Petmalu" Ilagan + pareng max
 	const toggleCartHandler = () => {
-		setCartIsShown(!cartIsShown);
+		setCartIsShown((prevCartIsShown) => !prevCartIsShown);
 	};
 
 	return (
