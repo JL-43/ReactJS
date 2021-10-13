@@ -13,7 +13,6 @@ function App() {
 		for (const taskKey in tasksObj) {
 			loadedTasks.push({ id: taskKey, text: tasksObj[taskKey].text });
 		}
-
 		setTasks(loadedTasks);
 	};
 
@@ -21,10 +20,12 @@ function App() {
 		isLoading,
 		error,
 		sendRequest: fetchTasks,
-	} = useHttp({
-		url: 'https://react-http-4ef3a-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json',
-		transformTasks,
-	});
+	} = useHttp(
+		{
+			url: 'https://react-http-4ef3a-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json',
+		},
+		transformTasks
+	);
 
 	useEffect(() => {
 		fetchTasks();
