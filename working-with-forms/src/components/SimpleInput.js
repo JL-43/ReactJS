@@ -1,25 +1,47 @@
 // Forms using useState
 // useState better for instant validation and resetting input
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 const SimpleInput = (props) => {
 	const [enteredName, setEnteredName] = useState('');
+	const [enteredNameIsValid, setEnteredNameIsValid] = useState(false);
+	const [enteredNameTouched, setEnteredNameTouched] = useState(false);
+
+	useEffect(() => {
+		if (enteredNameIsValid) {
+			console.log('Name input is valid!');
+		}
+	}, [enteredNameIsValid]);
+
 	const nameInputChangeHandler = (e) => {
 		setEnteredName(e.target.value);
 	};
+
 	const formSubmissionHandler = (e) => {
 		e.preventDefault();
+
+		setEnteredNameTouched(true);
+
 		if (enteredName.trim() === '') {
+			setEnteredNameIsValid(false);
 			return;
 		}
+
+		setEnteredNameIsValid(true);
 
 		console.log(enteredName);
 		setEnteredName('');
 	};
 
+	const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
+
+	const nameInputClasses = nameInputIsInvalid
+		? 'form-control invalid'
+		: 'form-control';
+
 	return (
 		<form onSubmit={formSubmissionHandler}>
-			<div className='form-control'>
+			<div className={nameInputClasses}>
 				<label htmlFor='name'>Your Name</label>
 				<input
 					type='text'
@@ -27,6 +49,9 @@ const SimpleInput = (props) => {
 					onChange={nameInputChangeHandler}
 					value={enteredName}
 				/>
+				{nameInputIsInvalid && (
+					<p className='error-text'>Name must not be empty!</p>
+				)}
 			</div>
 			<div className='form-actions'>
 				<button>Submit</button>
