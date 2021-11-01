@@ -81,6 +81,14 @@ const AvailableMeals = () => {
 		);
 	}
 
+	if (error) {
+		return (
+			<section className={classes.MealsError}>
+				<p>{error}!</p>
+			</section>
+		);
+	}
+
 	const mealsList = meals.map(({ id, name, description, price }) => {
 		return (
 			<MealItem
