@@ -56,7 +56,6 @@ const AvailableMeals = () => {
 			for (const key in data) {
 				loadedMeals.push({
 					id: key,
-					key: key,
 					name: data[key].name,
 					description: data[key].description,
 					price: data[key].price,
@@ -73,6 +72,14 @@ const AvailableMeals = () => {
 	useEffect(() => {
 		fetchMealsHandler();
 	}, [fetchMealsHandler]);
+
+	if (isLoading) {
+		return (
+			<section className={classes.MealsLoading}>
+				<p>Loading...</p>
+			</section>
+		);
+	}
 
 	const mealsList = meals.map(({ id, name, description, price }) => {
 		return (
